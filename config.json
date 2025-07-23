@@ -1,0 +1,41 @@
+{
+    "keys": [
+        {
+            "key": "z",
+            "position": [0, 0]
+        },
+        {
+            "key": "x",
+            "position": [110, 0]
+        }
+    ],
+
+    "defaultKeySetup": {
+        "width": 100,
+        "height": 100,
+        "trailLength": 400,
+        "trailTime": 750,
+        "showLabel": true,
+        "showTrail": true,
+        "showCounter": true,
+
+        "borderWidth": 2,
+        "trailOffset": 0,
+        "labelFontSize": 64,
+        "counterFontSize": 32,
+        "labelRotation": 0,
+
+        "backgroundColor": [25, 25, 25],
+        "pressedBackgroundColor": [100, 100, 100],
+        "trailColor": [200, 200, 200],
+        "borderColor": [255, 0, 0],
+        "labelColor": [255, 255, 255],
+        "counterColor": [0, 255, 100]
+    },
+
+    "font": "godoMaumRdcd.ttf",
+    "fps": 60,
+
+    "windowBackgroundColor": [0, 0, 0],
+    "windowPadding": 5
+}
