@@ -32,6 +32,7 @@ class KeyButton:
         self.show_label = show_label
         self.label = pygame.font.Font(font, label_font_size).render(label, True, self.label_color)
         self.label = pygame.transform.rotate(self.label, label_rotation)
+        self.label.set_alpha(self.label_color[3])
         # Meanwhile, counter will be rerendered every frame
         self.counter_font = pygame.font.Font(font, counter_font_size)
         self.show_counter = show_counter
@@ -74,17 +75,29 @@ class KeyButton:
             for trail in self.trails:
                 trail_rect = pygame.Rect(self.rect.left, self.trail_bottom - trail.top, self.trail_width, trail.length())
                 trail_rect.centerx = self.rect.centerx
-                
-                pygame.draw.rect(self.window, self.trail_color, trail_rect)
+
+                trail_box = pygame.Surface(trail_rect.size)
+                trail_box.set_alpha(self.trail_color[3])
+                trail_box.fill(self.trail_color)
+                self.window.blit(trail_box, trail_rect)
 
         # Render button
-        pygame.draw.rect(self.window, self.pressed_background_color if currently_pressed else self.background_color, self.rect)
-        pygame.draw.rect(self.window, self.border_color, self.rect, self.border_width)
+        border_box = pygame.Surface((self.rect.size[0] + self.border_width, self.rect.size[1] + self.border_width))
+        border_box.set_alpha(self.border_color[3])
+        pygame.draw.rect(border_box, self.border_color, ((0, 0), self.rect.size), self.border_width)
+        self.window.blit(border_box, self.rect)
+
+        back_box = pygame.Surface((self.rect.size[0] - 2 * self.border_width, self.rect.size[1] - 2 * self.border_width))
+        back_box.set_alpha(self.pressed_background_color[3] if currently_pressed else self.background_color[3])
+        back_box.fill(self.pressed_background_color if currently_pressed else self.background_color)
+        self.window.blit(back_box, (self.rect.left + self.border_width, self.rect.top + self.border_width))
+
         if self.show_label:
             self.window.blit(self.label, self.label.get_rect(center=self.rect.center))
 
         if self.show_counter:
             counter_surface = self.counter_font.render(str(memory_keys.get(self.key, 0)), True, self.counter_color)
+            counter_surface.set_alpha(self.counter_color[3])
             self.window.blit(counter_surface, counter_surface.get_rect(centerx=self.rect.centerx, bottom=self.rect.bottom))
 
         self.last_frame_pressed = currently_pressed

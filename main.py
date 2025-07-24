@@ -78,10 +78,15 @@ if __name__ == "__main__":
     left, right, top, bottom = None, None, None, None
     for entry in config["keys"]:
         ## Add default values for key if skipped
-        default = config["defaultKeySetup"]
+        default: dict[str, str | int | float | list] = config["defaultKeySetup"]
         for setting in default:
             if setting not in entry:
                 entry[setting] = default[setting]
+
+            # Set default transparency to 255
+            if setting.lower().endswith("color"):
+                if len(entry[setting]) == 3:
+                    entry[setting].append(255)
 
         entry_left = entry["position"][0]
         entry_right = entry_left + entry["width"]

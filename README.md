@@ -16,6 +16,7 @@ can be found in `defaultKeySetup`, and adding them to a key will override the se
 Details:
 * `position` is the bottom-left of the button
 * Colors should be RGB values from 0–255 in a 3-length array
+    * Adding a 4th value from 0–255 will set its alpha (transparent–opaque)
 * Font sizes are dependent on the font (because PyGame)
 * `trailOffset` is how far below the top of the button to start the trail
     * Useful if you want to elevate some keys above others
@@ -26,4 +27,5 @@ You can pip install these:
 * Pynput
 
 ## Note
-I sourced `godoMaum.ttf` from a website and reduced it to ASCII glyphs only; I do not claim it as mine.
+I sourced `godoMaum.ttf` from a website and reduced it to a subset of ASCII glyphs only;
+I do not claim it as mine.
