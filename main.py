@@ -53,7 +53,7 @@ def parse_key(key_setup: dict, window: pygame.Surface) -> KeyButton:
 
     return KeyButton(
         window, (key_setup["position"][0], button_bottom), (key_setup["width"], key_setup["height"]),
-        key_setup["borderWidth"], trail_length, trail_speed, key_setup["trailOffset"],
+        key_setup["borderWidth"], key_setup["trailWidth"], trail_length, trail_speed, key_setup["trailOffset"],
         key_setup["backgroundColor"], key_setup["pressedBackgroundColor"], key_setup["borderColor"],
         key_setup["labelColor"], key_setup["counterColor"], key_setup["trailColor"], font,
         key_setup["key"], key_setup["labelFontSize"], key_setup["counterFontSize"], key_setup["labelRotation"],

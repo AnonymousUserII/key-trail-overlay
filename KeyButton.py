@@ -6,8 +6,8 @@ with redirect_stdout(None):
 class KeyButton:
     # Position will taken as bottom-left
     def __init__(
-        self, window, position: tuple[int, int], dimensions: tuple[int, int], border_width,
-        trail_length: int, trail_speed: float, trail_offset: float,
+        self, window, position: tuple[int, int], dimensions: tuple[int, int], border_width: int,
+        trail_width: int, trail_length: int, trail_speed: float, trail_offset: float,
         background_color, pressed_background_color, border_color, label_color, counter_color, trail_color,
         font, label: str, label_font_size: int, counter_font_size: int, label_rotation: int,
         show_label: bool, show_counter: bool,
@@ -36,6 +36,7 @@ class KeyButton:
         self.counter_font = pygame.font.Font(font, counter_font_size)
         self.show_counter = show_counter
 
+        self.trail_width = trail_width
         self.trail_length = trail_length
         self.trail_speed = trail_speed
         self.trails: list[Trail] = []
@@ -71,7 +72,9 @@ class KeyButton:
 
             ## Render trails
             for trail in self.trails:
-                trail_rect = pygame.Rect(self.rect.left, self.trail_bottom - trail.top, self.rect.width, trail.length())
+                trail_rect = pygame.Rect(self.rect.left, self.trail_bottom - trail.top, self.trail_width, trail.length())
+                trail_rect.centerx = self.rect.centerx
+                
                 pygame.draw.rect(self.window, self.trail_color, trail_rect)
 
         # Render button
